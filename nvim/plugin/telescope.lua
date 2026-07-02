@@ -8,19 +8,6 @@ local actions = require('telescope.actions')
 
 local builtin = require('telescope.builtin')
 
-local layout_config = {
-  vertical = {
-    width = function(_, max_columns)
-      return math.floor(max_columns * 0.99)
-    end,
-    height = function(_, _, max_lines)
-      return math.floor(max_lines * 0.99)
-    end,
-    prompt_position = 'bottom',
-    preview_cutoff = 0,
-  },
-}
-
 -- Fall back to find_files if not in a git repo
 local project_files = function()
   local opts = {} -- define here if you want to define something
@@ -69,21 +56,29 @@ local function fuzzy_grep_current_file_type()
   grep_current_file_type(fuzzy_grep)
 end
 
-vim.keymap.set('n', '<leader>tp', function()
-  builtin.find_files()
-end, { desc = '[t]elescope find files - ctrl[p] style' })
-vim.keymap.set('n', '<M-p>', builtin.oldfiles, { desc = '[telescope] old files' })
-vim.keymap.set('n', '<C-g>', builtin.live_grep, { desc = '[telescope] live grep' })
-vim.keymap.set('n', '<leader>tf', fuzzy_grep, { desc = '[t]elescope [f]uzzy grep' })
-vim.keymap.set('n', '<M-f>', fuzzy_grep_current_file_type, { desc = '[telescope] fuzzy grep filetype' })
-vim.keymap.set('n', '<M-g>', live_grep_current_file_type, { desc = '[telescope] live grep filetype' })
+-- See `:help telescope.builtin`
+vim.keymap.set('n', '<leader>sh', builtin.help_tags, { desc = '[S]earch [H]elp' })
+vim.keymap.set('n', '<leader>sk', builtin.keymaps, { desc = '[S]earch [K]eymaps' })
+vim.keymap.set('n', '<leader>sf', builtin.find_files, { desc = '[S]earch [F]iles' })
+vim.keymap.set('n', '<leader>ss', builtin.builtin, { desc = '[S]earch [S]elect Telescope' })
+vim.keymap.set({ 'n', 'v' }, '<leader>sw', builtin.grep_string, { desc = '[S]earch current [W]ord' })
+vim.keymap.set('n', '<leader>sg', builtin.live_grep, { desc = '[S]earch by [G]rep' })
+vim.keymap.set('n', '<leader>sd', builtin.diagnostics, { desc = '[S]earch [D]iagnostics' })
+vim.keymap.set('n', '<leader>sr', builtin.resume, { desc = '[S]earch [R]esume' })
+vim.keymap.set('n', '<leader>s.', builtin.oldfiles, { desc = '[S]earch Recent Files ("." for repeat)' })
+vim.keymap.set('n', '<leader>sc', builtin.commands, { desc = '[S]earch [C]ommands' })
+vim.keymap.set('n', '<leader><leader>', builtin.buffers, { desc = '[ ] Find existing buffers' })
+
+vim.keymap.set('n', '<leader>fg', fuzzy_grep, { desc = '[F]uzzy [G]rep' })
+vim.keymap.set('n', '<leader>fgf', fuzzy_grep_current_file_type, { desc = '[F]uzzy [G]rep [F]iletype' })
+vim.keymap.set('n', '<leader>lgf', live_grep_current_file_type, { desc = '[L]ive [G]rep [F]iletype' })
 vim.keymap.set(
   'n',
-  '<leader>t*',
+  '<leader>*f',
   grep_string_current_file_type,
-  { desc = '[t]elescope grep current string [*] in current filetype' }
+  { desc = 'grep current string [*] in current [f]iletype' }
 )
-vim.keymap.set('n', '<leader>*', builtin.grep_string, { desc = '[telescope] grep current string [*]' })
+vim.keymap.set('n', '<leader>*', builtin.grep_string, { desc = 'grep current string [*]' })
 vim.keymap.set('n', '<leader>tg', project_files, { desc = '[t]elescope project files [g]' })
 vim.keymap.set('n', '<leader>tc', builtin.quickfix, { desc = '[t]elescope quickfix list [c]' })
 vim.keymap.set('n', '<leader>tq', builtin.command_history, { desc = '[t]elescope command history [q]' })
@@ -109,8 +104,6 @@ telescope.setup {
     path_display = {
       'truncate',
     },
-    layout_strategy = 'vertical',
-    layout_config = layout_config,
     mappings = {
       i = {
         ['<C-q>'] = actions.send_to_qflist,
@@ -151,9 +144,12 @@ telescope.setup {
     fzy_native = {
       override_generic_sorter = false,
       override_file_sorter = true,
+      ['ui-select'] = { require('telescope.themes').get_dropdown() },
     },
   },
 }
 
 telescope.load_extension('fzy_native')
+telescope.load_extension("ui-select")
+telescope.load_extension("ui-select")
 -- telescope.load_extension('smart_history')
