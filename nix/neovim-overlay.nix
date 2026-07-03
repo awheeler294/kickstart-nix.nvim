@@ -79,7 +79,6 @@ let
 
     # navigation/editing enhancement plugins
     vim-unimpaired # predefined ] and [ navigation keymaps | https://github.com/tpope/vim-unimpaired/
-    eyeliner-nvim # Highlights unique characters for f/F and t/T motions | https://github.com/jinh0/eyeliner.nvim
     mini-ai # Extend and create a/i textobjects | https://github.com/nvim-mini/mini.ai/
     mini-comment # Comment lines | https://github.com/nvim-mini/mini.comment/
     mini-surround # Surround actions | https://github.com/kylechui/nvim-surround/
