@@ -202,7 +202,8 @@ local function toggle_codebook()
    vim.diagnostic.enable(not vim.diagnostic.is_enabled({ ns_id = namespace, bufnr = 0 }))
 end
 
-vim.keymap.set('n', '<leader>k', toggle_codebook, { noremap = true, silent = true, desc = 'Toggle Codeboo[k]' })
+vim.keymap.set('n', '<leader>k', toggle_codebook,
+   { noremap = true, silent = true, desc = 'Toggle Codebook spell chec[k]' })
 
 keymap.set('n', '<C-d>', '<C-d>zz', { desc = 'move [d]own half-page and center' })
 keymap.set('n', '<C-u>', '<C-u>zz', { desc = 'move [u]p half-page and center' })
