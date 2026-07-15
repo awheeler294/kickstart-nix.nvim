@@ -7,7 +7,7 @@ local cmp = require('cmp')
 local lspkind = require('lspkind')
 local luasnip = require('luasnip')
 
-vim.opt.completeopt = { 'menu', 'menuone', 'noselect' }
+vim.opt.completeopt = { 'menu', 'menuone', 'noselect', 'noinsert', 'preview', 'fuzzy', 'popup' }
 
 local function has_words_before()
    local unpack_ = unpack or table.unpack
@@ -152,6 +152,7 @@ cmp.setup.cmdline(':', {
 })
 
 vim.keymap.set({ 'i', 'c', 's' }, '<C-n>', cmp.complete, { noremap = false, desc = '[cmp] complete' })
+
 vim.keymap.set({ 'i', 'c', 's' }, '<C-f>', function()
    complete_with_source('path')
 end, { noremap = false, desc = '[cmp] path' })
