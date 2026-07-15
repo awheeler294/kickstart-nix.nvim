@@ -6,12 +6,12 @@ let
   pkgs = final;
 
   # Use this to create a plugin from a flake input
-  mkNvimPlugin =
-    src: pname:
-    pkgs.vimUtils.buildVimPlugin {
-      inherit pname src;
-      version = src.lastModifiedDate;
-    };
+  # mkNvimPlugin =
+  #   src: pname:
+  #   pkgs.vimUtils.buildVimPlugin {
+  #     inherit pname src;
+  #     version = src.lastModifiedDate;
+  #   };
 
   # Make sure we use the pinned nixpkgs instance for wrapNeovimUnstable,
   # otherwise it could have an incompatible signature when applying this overlay.
@@ -75,6 +75,7 @@ let
     # ^ UI
 
     # language support
+    nvim-lspconfig # default lsp configs | https://github.com/neovim/nvim-lspconfig
     # ^ language support
 
     # navigation/editing enhancement plugins
@@ -108,6 +109,8 @@ let
 
   extraPackages = with pkgs; [
     # language servers, etc.
+    codebook # Unholy spellchecker for code
+    harper # Grammar Checker for Developers
     lua-language-server
     nil # nix LSP
   ];
