@@ -70,6 +70,7 @@ let
     # UI
     indent-blankline-nvim # show indent level | https://github.com/lukas-reineke/indent-blankline.nvim
     mini-statusline # Status line | https://github.com/nvim-mini/mini.statusline/
+    nvim-colorizer-lua # Color highlighter | https://github.com/catgoose/nvim-colorizer.lua/
     nvim-treesitter-context # nvim-treesitter-context
     statuscol-nvim # Status column | https://github.com/luukvbaal/statuscol.nvim/
     # ^ UI

@@ -44,3 +44,7 @@ require('mini.comment').setup()
 
 -- TODO: add a comment here
 require("todo-comments").setup { signs = false }
+
+require("colorizer").setup({
+   options = { parsers = { css = true } },
+})
